@@ -1,0 +1,88 @@
+/* Estilos para o campo de código PIX e botão de copiar */
+.pix-code-container {
+    margin: 20px 0;
+}
+
+.pix-code-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.pix-code-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.pix-code {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.copy-pix-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 12px 15px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.copy-pix-btn:hover {
+    background-color: #1976d2;
+}
+
+.copy-pix-btn i {
+    font-size: 1rem;
+}
+
+.copy-success {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.copy-success.show {
+    opacity: 1;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+    .pix-code-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .pix-code {
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        margin-bottom: 0;
+    }
+    
+    .copy-pix-btn {
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        justify-content: center;
+    }
+}
