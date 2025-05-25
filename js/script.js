@@ -61,6 +61,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Toggle Mentor Fields
+    const professionalRadio = document.getElementById('professional');
+    const mentorRadio = document.getElementById('mentor');
+    const mentorFields = document.getElementById('mentor-fields');
+    
+    if (professionalRadio && mentorRadio && mentorFields) {
+        // Initial check
+        mentorFields.style.display = mentorRadio.checked ? 'block' : 'none';
+        
+        // Add event listeners
+        professionalRadio.addEventListener('change', function() {
+            mentorFields.style.display = 'none';
+        });
+        
+        mentorRadio.addEventListener('change', function() {
+            mentorFields.style.display = 'block';
+        });
+    }
+    
     // Pre-registration Form Submission
     const preRegistrationForm = document.getElementById('pre-registration-form');
     const successModal = document.getElementById('success-modal');
@@ -70,14 +89,29 @@ document.addEventListener('DOMContentLoaded', function() {
         preRegistrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Check if mentor is selected
+            const isMentor = document.getElementById('mentor').checked;
+            
             // In a real implementation, you would send the form data to a server
-            // For this demo, we'll show the PIX payment modal
-            if (pixModal) {
-                pixModal.classList.add('active');
+            if (isMentor) {
+                // For mentors, show success modal directly
+                if (successModal) {
+                    successModal.classList.add('active');
+                }
+            } else {
+                // For professionals, show PIX payment modal
+                if (pixModal) {
+                    pixModal.classList.add('active');
+                }
             }
             
             // Reset form
             this.reset();
+            
+            // Hide mentor fields if they were visible
+            if (mentorFields) {
+                mentorFields.style.display = 'none';
+            }
         });
     }
     
@@ -102,6 +136,51 @@ document.addEventListener('DOMContentLoaded', function() {
             if (successModal) {
                 successModal.classList.add('active');
             }
+        });
+    }
+    
+    // Copy PIX Code Functionality
+    const copyPixCodeBtn = document.getElementById('copy-pix-code');
+    const pixCodeInput = document.getElementById('pix-code');
+    
+    if (copyPixCodeBtn && pixCodeInput) {
+        copyPixCodeBtn.addEventListener('click', function() {
+            // Select the text
+            pixCodeInput.select();
+            pixCodeInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(pixCodeInput.value)
+                .then(() => {
+                    // Create success message if it doesn't exist
+                    let successMsg = document.querySelector('.copy-success');
+                    if (!successMsg) {
+                        successMsg = document.createElement('div');
+                        successMsg.className = 'copy-success';
+                        successMsg.textContent = 'Código copiado!';
+                        document.querySelector('.pix-code-wrapper').appendChild(successMsg);
+                    }
+                    
+                    // Show success message
+                    successMsg.classList.add('show');
+                    
+                    // Hide after 2 seconds
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar texto: ', err);
+                    
+                    // Fallback for older browsers
+                    try {
+                        document.execCommand('copy');
+                        alert('Código copiado!');
+                    } catch (err) {
+                        console.error('Fallback falhou: ', err);
+                        alert('Não foi possível copiar automaticamente. Por favor, selecione e copie o código manualmente.');
+                    }
+                });
         });
     }
     

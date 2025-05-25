@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/pix-modal.css">
+    <link rel="stylesheet" href="css/pix-code.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -470,21 +471,47 @@
                                 <option value="outra">Outra</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Perfil</label>
-                            <div class="radio-group">
-                                <label class="radio">
-                                    <input type="radio" name="profile" value="professional" checked>
-                                    <span>Usuário</span>
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" name="profile" value="mentor">
-                                    <span>Mentor</span>
-                                </label>
-                            </div>
+                  <div class="form-group">
+                    <label for="profile-type">Tipo de perfil</label>
+                    <div class="profile-options">
+                        <div class="profile-option">
+                            <input type="radio" id="professional" name="profile-type" value="professional" checked>
+                            <label for="professional">Profissional</label>
                         </div>
-                        <button type="submit" class="btn-primary">Garantir acesso antecipado</button>
-                    </form>
+                        <div class="profile-option">
+                            <input type="radio" id="mentor" name="profile-type" value="mentor">
+                            <label for="mentor">Mentor</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Campos adicionais para mentores (inicialmente ocultos) -->
+                <div id="mentor-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="specialty">Especialidade</label>
+                        <input type="text" id="specialty" name="specialty" placeholder="Ex: Cardiologia, Pediatria, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Anos de experiência</label>
+                        <input type="number" id="experience" name="experience" min="1" placeholder="Ex: 10">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration">Número de registro profissional</label>
+                        <input type="text" id="registration" name="registration" placeholder="Ex: CRM/COREN/CRO...">
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Disponibilidade semanal (horas)</label>
+                        <select id="availability" name="availability">
+                            <option value="">Selecione</option>
+                            <option value="1-5">1-5 horas</option>
+                            <option value="6-10">6-10 horas</option>
+                            <option value="11-20">11-20 horas</option>
+                            <option value="20+">Mais de 20 horas</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Garantir acesso antecipado</button>              </form>
                     <div class="registration-benefits">
                         <h3>Benefícios do acesso antecipado</h3>
                         <ul>
